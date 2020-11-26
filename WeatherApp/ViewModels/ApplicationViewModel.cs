@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using WeatherApp.Commands;
 using WeatherApp.Properties;
@@ -50,7 +51,7 @@ namespace WeatherApp.ViewModels
            
             /// TODO 11 : Commenter cette ligne lorsque la configuration utilisateur fonctionne
            // var apiKey = AppConfiguration.GetValue("OWApiKey");
-            //ows = new OpenWeatherService(apiKey);
+            ows = new OpenWeatherService(Settings.Default.apiKey);
 
             initViewModels();
         }
@@ -70,7 +71,7 @@ namespace WeatherApp.ViewModels
             }
             else
             {
-                ows.SetApiKey(Settings.Default.apiKey);   
+                ows = new OpenWeatherService(Settings.Default.apiKey);
             }
             tvm.SetTemperatureService(ows);
             ViewModels.Add(tvm);
@@ -94,22 +95,17 @@ namespace WeatherApp.ViewModels
             ///     Assigner le service de température
             /// 
 
-            if(pageName == "ConfigurationViewModel")
+            if (CurrentViewModel.Name == "ConfigurationViewModel")
             {
-
-                //on ne veut pas envoyer un null dans temperature view model
-                if(ows == null)
-                {
-                    ows = new OpenWeatherService(Settings.Default.apiKey);
-                }
                 ows.SetApiKey(Settings.Default.apiKey);
-
-                TemperatureViewModel temperatureViewModel = (TemperatureViewModel)ViewModels.FirstOrDefault(x => x.Name == "TemperatureViewModel");
-                if (temperatureViewModel.TemperatureService == null)
-
-                    temperatureViewModel.SetTemperatureService(ows);
-
+                TemperatureViewModel tempViewModel = (TemperatureViewModel)ViewModels.FirstOrDefault(x => x.Name == "TemperatureViewModel");
+                if (tempViewModel.TemperatureService == null)
+                {
+                    ITemperatureService tempService = new OpenWeatherService(AppConfiguration.GetValue("apikey"));
+                    tempViewModel.SetTemperatureService(tempService);
+                }
             }
+
 
 
             /// Permet de retrouver le ViewModel avec le nom indiqé

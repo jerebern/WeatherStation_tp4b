@@ -35,13 +35,13 @@ namespace WeatherApp.ViewModels
             /// TODO 04a : Sauvegarder la configuration
             Settings.Default.apiKey = apiKey;
             Settings.Default.Save();
-
+            ApiKey = apiKey;
         }
 
         private string GetApiKey()
         {
             /// TODO 05 : Retourner la configuration
-            return apiKey;
+            return Settings.Default.apiKey;
         }
 
     }
