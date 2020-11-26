@@ -93,7 +93,24 @@ namespace WeatherApp.ViewModels
             ///   Si le service de temperature est null
             ///     Assigner le service de température
             /// 
-           
+
+            if(pageName == "ConfigurationViewModel")
+            {
+
+                //on ne veut pas envoyer un null dans temperature view model
+                if(ows == null)
+                {
+                    ows = new OpenWeatherService(Settings.Default.apiKey);
+                }
+                ows.SetApiKey(Settings.Default.apiKey);
+
+                TemperatureViewModel temperatureViewModel = (TemperatureViewModel)ViewModels.FirstOrDefault(x => x.Name == "TemperatureViewModel");
+                if (temperatureViewModel.TemperatureService == null)
+
+                    temperatureViewModel.SetTemperatureService(ows);
+
+            }
+
 
             /// Permet de retrouver le ViewModel avec le nom indiqé
             CurrentViewModel = ViewModels.FirstOrDefault(x => x.Name == pageName);  

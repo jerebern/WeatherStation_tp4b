@@ -29,8 +29,8 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <!-- TODO 07 : Faire les bindings -->
-                <MenuItem Header="Weather Station" Command="{Binding ChangePageCommand}" CommandParameter="TemperatureView"/>
-                <MenuItem Header="Preferences..." Command="{Binding ChangePageCommand}" CommandParameter="ConfigurationView"/>
+                <MenuItem Header="Weather Station" Command="{Binding ChangePageCommand}" CommandParameter="TemperatureViewModel"/>
+                <MenuItem Header="Preferences..." Command="{Binding ChangePageCommand}" CommandParameter="ConfigurationViewModel"/>
             </MenuItem>
         </Menu>
         <ContentControl Content="{Binding CurrentViewModel}"/>
