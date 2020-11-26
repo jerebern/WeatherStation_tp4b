@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WeatherApp.Commands;
+using WeatherApp.Properties;
 using WeatherApp.Services;
 
 namespace WeatherApp.ViewModels
@@ -63,7 +64,14 @@ namespace WeatherApp.ViewModels
 
             /// TODO 09 : Indiquer qu'il n'y a aucune clé si le Settings apiKey est vide.
             /// S'il y a une valeur, instancié OpenWeatherService avec la clé
-                
+           if( Settings.Default.apiKey == "")
+            {
+                System.Windows.MessageBox.Show("Aucune clée API dans les setting");
+            }
+            else
+            {
+                ows.SetApiKey(Settings.Default.apiKey);   
+            }
             tvm.SetTemperatureService(ows);
             ViewModels.Add(tvm);
 
