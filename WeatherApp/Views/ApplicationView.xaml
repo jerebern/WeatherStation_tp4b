@@ -12,6 +12,9 @@
         <DataTemplate DataType="{x:Type models:TemperatureViewModel}">
             <views:TemperatureView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type models:ConfigurationViewModel}">
+            <views:TemperatureView/>
+        </DataTemplate>
         <!-- TODO 02 : Ajouter le DataTemplate pour la configuration -->
         
         
