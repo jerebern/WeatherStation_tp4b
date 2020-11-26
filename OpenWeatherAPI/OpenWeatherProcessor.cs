@@ -111,6 +111,15 @@ namespace OpenWeatherAPI
                     OWCurrentWeaterModel result = await response.Content.ReadAsAsync<OWCurrentWeaterModel>();
                     return result;
                 }
+                if (response.StatusCode.ToString() == "Not Found")
+                {
+                    throw new Exception("Ville non trouvé");
+                }
+                if (response.StatusCode.ToString() == "Unautorized")
+                {
+                    throw new Exception("ApiKey non valide");
+                }
+
 
                 return null;
 
