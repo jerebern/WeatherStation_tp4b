@@ -1,12 +1,12 @@
 ﻿using System;
 using WeatherApp.Commands;
+using WeatherApp.Properties;
 
 namespace WeatherApp.ViewModels
 {
     public class ConfigurationViewModel : BaseViewModel
     {
         private string apiKey;        
-
         public string ApiKey { 
             get => apiKey;
             set
@@ -15,6 +15,7 @@ namespace WeatherApp.ViewModels
                 OnPropertyChanged();
             }
         }
+        
 
         public DelegateCommand<string> SaveConfigurationCommand { get; set; }
 
@@ -32,6 +33,9 @@ namespace WeatherApp.ViewModels
         {
             /// TODO 04 : Les tâches manquantes sont dans les XAML.
             /// TODO 04a : Sauvegarder la configuration
+            Settings.Default.apiKey = apiKey;
+            Settings.Default.Save();
+
         }
 
         private string GetApiKey()
