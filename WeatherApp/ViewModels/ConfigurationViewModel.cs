@@ -41,7 +41,7 @@ namespace WeatherApp.ViewModels
         private string GetApiKey()
         {
             /// TODO 05 : Retourner la configuration
-            return string.Empty;
+            return apiKey;
         }
 
     }
